@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: workflow-api
+    runtime: docker
+    dockerfilePath: ./apps/backend/Dockerfile
+    dockerContext: ./apps/backend
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_DB_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+
+  - type: worker
+    name: workflow-worker
+    runtime: docker
+    dockerfilePath: ./apps/backend/Dockerfile
+    dockerContext: ./apps/backend
+    dockerCommand: node src/worker.js
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+
