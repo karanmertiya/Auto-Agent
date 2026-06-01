@@ -10,12 +10,16 @@
     "setup:db": "node scripts/setup-db.js"
   },
   "dependencies": {
+    "@langchain/core": "^1.1.48",
+    "@langchain/groq": "^1.2.1",
     "@supabase/supabase-js": "^2.49.8",
     "bullmq": "^5.58.0",
+    "cheerio": "^1.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "ioredis": "^5.4.2",
+    "langchain": "^1.4.2",
     "pg": "^8.13.3",
     "zod": "^3.24.2"
   },

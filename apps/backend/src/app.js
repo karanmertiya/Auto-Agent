@@ -5,6 +5,7 @@ import { env } from "./config/env.js";
 import { logError } from "./lib/logger.js";
 import { webhooksRouter } from "./routes/webhooks.js";
 import { workflowsRouter } from "./routes/workflows.js";
+import { ragRouter } from "./routes/rag.js";
 
 export const app = express();
 const allowedOrigins = env.FRONTEND_ORIGIN.split(",").map((origin) => origin.trim());
@@ -21,7 +22,7 @@ app.use(
     }
   })
 );
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json({ limit: "50mb" }));
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
@@ -29,6 +30,7 @@ app.get("/health", (_req, res) => {
 
 app.use("/api/workflows", workflowsRouter);
 app.use("/api/webhooks", webhooksRouter);
+app.use("/api/rag", ragRouter);
 
 app.use((error, _req, res, _next) => {
   logError("Unhandled API error", error);
