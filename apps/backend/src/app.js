@@ -6,6 +6,7 @@ import { logError } from "./lib/logger.js";
 import { webhooksRouter } from "./routes/webhooks.js";
 import { workflowsRouter } from "./routes/workflows.js";
 import { ragRouter } from "./routes/rag.js";
+import { dataAgentRouter } from "./routes/dataAgent.js";
 
 export const app = express();
 const allowedOrigins = env.FRONTEND_ORIGIN.split(",").map((origin) => origin.trim());
@@ -28,9 +29,10 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.use("/api/workflows", workflowsRouter);
-app.use("/api/webhooks", webhooksRouter);
-app.use("/api/rag", ragRouter);
+// app.use("/api/workflows", workflowsRouter);
+// app.use("/api/webhooks", webhooksRouter);
+// app.use("/api/rag", ragRouter);
+app.use("/api/data-agent", dataAgentRouter);
 
 app.use((error, _req, res, _next) => {
   logError("Unhandled API error", error);
