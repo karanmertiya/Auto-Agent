@@ -7,8 +7,7 @@ RUN npm install
 
 COPY . .
 
-ENV PORT=3001
-EXPOSE 3001
+ENV PORT=8080
+EXPOSE 8080
 
-CMD ["node", "src/server.js"]
-
+CMD ["node", "standalone_agent.js"]
